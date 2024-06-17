@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/botoes.css" />
+    <style>
+      .form-control {
+        margin-bottom: 15px;
+      }
+      .radio-group-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .radio-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+      .radio-group label {
+        margin-left: 5px;
+        white-space: nowrap;
+      }
+    </style>
+    <title>Formulário</title>
+  </head>
+  <body>
+    <div class="headerBotao">
+      <button class="botaonav" onclick="gotolink(this)" value="index.html">
+        Página principal
+      </button>
+      <button
+        class="botaonav"
+        onclick="gotolink(this)"
+        value="calculadora.html"
+      >
+        Calculadora
+      </button>
+    </div>
+    <div class="container">
+      <div class="header">
+        <h2>Dados</h2>
+      </div>
+
+      <form id="form" class="form">
+        <div class="form-control">
+          <label for="nome">Digite seu nome:</label>
+          <input type="text" id="nome" name="nome" required />
+        </div>
+
+        <div class="form-control">
+          <label for="datanasc">Data de nascimento</label>
+          <input type="date" id="datanasc" required />
+        </div>
+
+        <div class="form-control">
+          <label>Sexo</label>
+          <div class="radio-group-container">
+            <div class="radio-group">
+              <input
+                type="radio"
+                id="masculino"
+                name="sexo"
+                value="masculino"
+                required
+              />
+              <label for="masculino">Masculino</label>
+            </div>
+            <div class="radio-group">
+              <input
+                type="radio"
+                id="feminino"
+                name="sexo"
+                value="feminino"
+                required
+              />
+              <label for="feminino">Feminino</label>
+            </div>
+            <div class="radio-group">
+              <input
+                type="radio"
+                id="prefninf"
+                name="sexo"
+                value="prefiro nao informar"
+                required
+              />
+              <label for="prefninf">Prefiro não informar</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-control">
+          <label for="estado">Escolha seu estado:</label>
+          <select id="estado" name="estado" required>
+            <option value=""></option>
+            <option value="ac">Acre</option>
+            <option value="al">Alagoas</option>
+            <option value="am">Amazonas</option>
+            <option value="ap">Amapá</option>
+            <option value="ba">Bahia</option>
+            <option value="ce">Ceará</option>
+            <option value="df">Distrito Federal</option>
+            <option value="es">Espírito Santo</option>
+            <option value="go">Goiás</option>
+            <option value="ma">Maranhão</option>
+            <option value="mg">Minas Gerais</option>
+            <option value="ms">Mato Grosso do Sul</option>
+            <option value="mt">Mato Grosso</option>
+            <option value="pa">Pará</option>
+            <option value="pb">Paraíba</option>
+            <option value="pe">Pernambuco</option>
+            <option value="pi">Piauí</option>
+            <option value="pr">Paraná</option>
+            <option value="rj">Rio de Janeiro</option>
+            <option value="rn">Rio Grande do Norte</option>
+            <option value="ro">Rondônia</option>
+            <option value="rr">Roraima</option>
+            <option value="rs">Rio Grande do Sul</option>
+            <option value="sc">Santa Catarina</option>
+            <option value="se">Sergipe</option>
+            <option value="sp">São Paulo</option>
+            <option value="to">Tocantins</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label for="quantidade">Quantas geladeiras você tem em casa?:</label>
+          <input
+            type="number"
+            id="quantidade"
+            name="quantidade"
+            min="1"
+            max="10"
+            required
+          />
+        </div>
+
+        <button type="submit" class="submit">Enviar</button>
+      </form>
+    </div>
+    <button
+      id="btnImportarCadastro"
+      class="botaonav"
+      style="display: none"
+      onclick="gotolink(this)"
+      value="dados.html"
+    >
+      Importar Cadastro
+    </button>
+    <script src="js/botoes.js"></script>
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // evita o envio padrão do formulario
+
+        // captura dos dados do formulario
+        var nome = document.getElementById("nome").value;
+        var datanasc = document.getElementById("datanasc").value;
+        var sexo = document.querySelector('input[name="sexo"]:checked').value;
+        var estado = document.getElementById("estado").value;
+        var quantidade = document.getElementById("quantidade").value;
+
+        // monta o texto para ser exportado para o arquivo .txt
+        var textoExportacao = "Nome: " + nome + "\n";
+        textoExportacao += "Data de Nascimento: " + datanasc + "\n";
+        textoExportacao += "Sexo: " + sexo + "\n";
+        textoExportacao += "Estado: " + estado + "\n";
+        textoExportacao += "Quantidade de Geladeiras: " + quantidade + "\n";
+
+        // cria o objeto Blob para salvar o texto em um arquivo .txt
+        var blob = new Blob([textoExportacao], { type: "text/plain" });
+
+        // cria um link para download do arquivo
+        var link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "dados_formulario.txt";
+        link.click();
+      });
+
+      document.getElementById("form").addEventListener("submit", function (e) {
+        // mostra o botão de importar cadastro após o envio do formulário
+        document.getElementById("btnImportarCadastro").style.display =
+          "inline-block";
+      });
+    </script>
+  </body>
+</html>

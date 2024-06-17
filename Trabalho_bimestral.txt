@@ -1,0 +1,16 @@
+Trabalho Bimestral - 4,0
+
+SEM FRAMEWORKS
+
+- O trabalho deverá ser desenvolvido individual e apresentado dia 17-06.
+
+- Você deverá desenvolver um site responsivo para 3 dispositivos (celular, tablet e computador) (1,0)
+
+- O site deverá ter pelo menos 5 funções javascripts (1,0)
+
+- Uma das páginas deverá ser um formulário:
+	- deve estar bem formatado no css e com no mínimo 5 colunas de tipos diferentes (1,0)
+	- o formulário deve exportar o cadastro para um TXT (0,5)
+	- outra página do seu site, deve importar o cadastro e mostrar na tela formatado (0,5)
+	
+	COMO PESQUISA ADICIONAR UM CAMPO FILE PARA SELECIONAR O TXT A SER IMPORTADO
